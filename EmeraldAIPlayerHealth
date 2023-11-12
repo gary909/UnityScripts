@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+using EmeraldAI.CharacterController;
+using UnityEngine.UI;
+//using TMPro;
+
+namespace EmeraldAI.Example
+{
+    /// <summary>
+    /// An example health script that the EmeraldAIPlayerDamage script calls.
+    /// Various events can be created and used to cause damage to a 3rd party character controllers via the inspector.
+    /// You can also edit the EmeraldAIPlayerDamage script directly and add custom functions.
+    ///
+    /// **This modified version is sending the health amount at text to the canvas**
+    ///
+    ///</summary>
+    public class EmeraldAIPlayerHealth : MonoBehaviour
+    {
+        public int CurrentHealth = 100; [Space]
+        public UnityEvent DamageEvent;
+        public UnityEvent DeathEvent;
+
+        // Text for Canvas
+        public Text currentHealth_UI_Text; // working
+
+
+        [HideInInspector]
+        public int StartingHealth;
+
+        private void Start()
+        {
+            StartingHealth = CurrentHealth;
+
+            //Health UI Text
+            UpdateHealth_UI_Text(); // working
+        }
+
+        public void DamagePlayer (int DamageAmount)
+        {
+            CurrentHealth -= DamageAmount;
+
+            // Text for Canvas
+            //Debug.Log(CurrentHealth);
+            UpdateHealth_UI_Text(); // working
+
+            DamageEvent.Invoke();
+
+            if (CurrentHealth <= 0)
+            {
+                PlayerDeath();
+            }
+        }
+
+
+
+        // Code for Canvas UI
+        public void UpdateHealth_UI_Text()
+        {
+            currentHealth_UI_Text.text = "Health: " + CurrentHealth.ToString(); // working
+        }
+
+        public void PlayerDeath ()
+        {
+            DeathEvent.Invoke();
+        }
+    }
+}
