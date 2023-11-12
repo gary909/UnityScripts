@@ -1,0 +1,26 @@
+using UnityEngine;
+using TMPro;
+
+///
+/// **About: A quick script to check if Text Mesh Pro is working**
+///
+
+
+public class TextDisplay : MonoBehaviour
+{
+    public TMP_Text textMeshPro; // Reference to the TextMeshPro component
+    public string displayText = "Hello, World!"; // Text to be displayed
+
+    void Start()
+    {
+        // Check if TextMeshPro component is assigned
+        if (textMeshPro == null)
+        {
+            Debug.LogError("TextMeshPro component not assigned in the inspector!");
+            return;
+        }
+
+        // Set the text of TextMeshPro
+        textMeshPro.text = displayText;
+    }
+}
