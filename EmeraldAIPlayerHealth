@@ -13,7 +13,7 @@ namespace EmeraldAI.Example
     /// Various events can be created and used to cause damage to a 3rd party character controllers via the inspector.
     /// You can also edit the EmeraldAIPlayerDamage script directly and add custom functions.
     ///
-    /// **This modified version is sending the health amount at text to the canvas**
+    /// **This modified version is sending the health amount as text to the canvas**
     ///
     ///</summary>
     public class EmeraldAIPlayerHealth : MonoBehaviour
