@@ -45,8 +45,9 @@ namespace BNG {
         /// Amount of Pistol Clips currently available
         /// </summary>
         public int CurrentPistolClips = 5;
+
         // Display amount of pistol clips on Canvas
-        public TextMeshProUGUI PistolClipsText; // ***TMP Text: Reference to TextMeshPro object***
+        public TextMeshProUGUI UiPistolMagCountTMP; // ***TMP Text: Reference to TextMeshPro object***
 
         public int CurrentRifleClips = 5;
 
@@ -75,7 +76,7 @@ namespace BNG {
             // Holding shotgun, pistol, or rifle
             string grabName = g.HeldGrabbable.transform.name;
             if (grabName.Contains("Shotgun") || grabName.Contains("Pistol") || grabName.Contains("Rifle")) {
-                PistolClipsText.text = "Pistol Clips: " + CurrentPistolClips.ToString(); // ***TMP Text: Sets the starting amount of Pistol magazines on the canvas***
+                UiPistolMagCountTMP.text = "Pistol Clips: " + CurrentPistolClips.ToString(); // ***TMP Text: Sets the starting amount of Pistol magazines on the canvas***
                 return true;
             }
 
@@ -110,12 +111,12 @@ namespace BNG {
             // Pistol
             if (leftGrabberValid && LeftGrabber.HeldGrabbable.transform.name.Contains("Pistol") && CurrentPistolClips > 0) {
                 CurrentPistolClips--;
-                PistolClipsText.text = "Pistol Clips: " + CurrentPistolClips.ToString(); // ***TMP Text: Updates the number of Pistol magazines on the canvas***
+                UiPistolMagCountTMP.text = "Pistol Clips: " + CurrentPistolClips.ToString(); // ***TMP Text: Updates the number of Pistol magazines on the canvas***
                 return PistolClip;
             }
             else if (rightGrabberValid && RightGrabber.HeldGrabbable.transform.name.Contains("Pistol") && CurrentPistolClips > 0) {
                 CurrentPistolClips--;
-                PistolClipsText.text = "Pistol Clips: " + CurrentPistolClips.ToString();  // ***TMP Text: Updates the number of Pistol magazines on the canvas***
+                UiPistolMagCountTMP.text = "Pistol Clips: " + CurrentPistolClips.ToString();  // ***TMP Text: Updates the number of Pistol magazines on the canvas***
                 return PistolClip;
             }
 
