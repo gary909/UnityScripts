@@ -1,67 +1,34 @@
-// using UnityEngine;
-// using EmeraldAI.Example;
-
-// public class HealthPickup : MonoBehaviour
-// {
-//     public int healthAmount = 20; // The amount of health the pickup will provide
-
-//     private void OnTriggerEnter(Collider other)
-//     {
-//         if (other.CompareTag("Player"))
-//         {
-//             // Check if the player has the EmeraldAIPlayerHealth script attached
-//             EmeraldAIPlayerHealth playerHealth = other.GetComponent<EmeraldAIPlayerHealth>();
-
-//             if (playerHealth != null)
-//             {
-//                 // Increase the player's health
-//                 playerHealth.CurrentHealth += healthAmount;
-
-//                 // Destroy the health pickup after it has been collected
-//                 Destroy(gameObject);
-//             }
-//             else
-//             {
-//                 Debug.LogError("EmeraldAIPlayerHealth script not found on the player GameObject.");
-//             }
-//         }
-//     }
-// }
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EmeraldAI.Example;
-using EmeraldAI;
-using UnityEngine.Events;
+
+/// <summary>
+/// A script to add to health pickups, once picked up
+/// the object is hidden from view and the amount of 
+/// health is sent to the 'Player'.  The following is added
+/// in the player health script;
+/// 
+///    void ApplyHeal(int heal)
+///    {
+///    CurrentHealth += heal; // add health points from healthPickup
+///    UpdateHealth_UI_Text(); // upDate UI Text 
+///    }
+///    
+/// </summary>
 
 public class HealthPickup: MonoBehaviour
 {
+    public int healthAmount = 10;
 
-    public UnityEvent onPlayerEnterTrigger;
-
-    private void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Player"))
+        if (other.transform.CompareTag("Player"))
         {
-            Debug.Log("Player Entered");
-            OnPlayerEnterTrigger();
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<Collider>().enabled = false;
+            Debug.Log("Player picked up Health"); // Message to show working
+            gameObject.GetComponent<MeshRenderer>().enabled = false; // Disable mesh renderer to look like its been picked up
+            gameObject.GetComponent<Collider>().enabled = false; // Disable mesh Collider once it's been picked up
+            other.transform.SendMessage("ApplyHeal", healthAmount);
         }
     }
-
-    // Callback for onPlayerEnterTrigger
-    public virtual void OnPlayerEnterTrigger()
-    {
-
-        // Call event
-        if (onPlayerEnterTrigger != null)
-        {
-            onPlayerEnterTrigger.Invoke();
-        }
-    }
-
-
-
 }
+
