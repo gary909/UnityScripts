@@ -18,16 +18,17 @@ using UnityEngine;
 
 public class HealthPickup: MonoBehaviour
 {
-    public int healthAmount = 10;
+    public int healthAmount = 25;
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Player"))
         {
-            Debug.Log("Player picked up Health"); // Message to show working
+            //Destroy(gameObject); // Too slow, removed
             gameObject.GetComponent<MeshRenderer>().enabled = false; // Disable mesh renderer to look like its been picked up
             gameObject.GetComponent<Collider>().enabled = false; // Disable mesh Collider once it's been picked up
             other.transform.SendMessage("ApplyHeal", healthAmount);
+            //Debug.Log("Player picked up Health"); // Message to show working
         }
     }
 }
