@@ -21,7 +21,7 @@ namespace EmeraldAI.Example
     public class EmeraldAIPlayerHealth : MonoBehaviour
     {
         public int CurrentHealth = 70;[Space] // Health
-        public int CurrentArmour = 100;[Space] // Armour
+        public int CurrentArmour = 0;[Space] // Armour
 
         public UnityEvent DamageEvent;
         public UnityEvent DeathEvent;
@@ -44,12 +44,12 @@ namespace EmeraldAI.Example
             UpdateArmour_UI_Text(); // Armourh UI Text
         }
 
-        // Make CurrentHealth int accessible to other scripts (eg HealthPickup.cs)
-        public int GetCurrentHealth()
-        {
-            return CurrentHealth;
-        }
-
+        // Make CurrentHealth int accessible to other scripts (eg HealthPickup.cs)              // Not needed?  Remove??
+        //public int GetCurrentHealth()
+        //{
+            //return CurrentHealth;
+        //}
+        
         public void DamagePlayer(int DamageAmount)
         {
             int initDamage = CurrentArmour - DamageAmount; // init Check if damage taken results in Armour negative amount
@@ -92,6 +92,63 @@ namespace EmeraldAI.Example
             //Stores the current health and subtracts the dame value
             CurrentHealth += heal; // add health points from healthPickup
             UpdateHealth_UI_Text(); // upDate UI Text 
+            }
+        }
+
+        void ApplyHealMega(int heal) // For applying 200 HP OR 1hp for small pickup
+        {
+            if (CurrentHealth > 200)
+            {
+                // Do nothing
+            }
+            else if (CurrentHealth + heal > 200)
+            {
+                CurrentHealth = 200;
+                UpdateHealth_UI_Text(); // upDate UI Text 
+            }
+            else
+            {
+                //Stores the current health and subtracts the dame value
+                CurrentHealth += heal; // add health points from healthPickup
+                UpdateHealth_UI_Text(); // upDate UI Text 
+            }
+        }
+
+        void ApplyArmour(int ArmrAmnt) // Add 100 Armour HP from ArmourPickup.cs
+        {
+            if (CurrentArmour > 100)
+            {
+                // Do nothing
+            }
+            else if (CurrentArmour + ArmrAmnt > 100)
+            {
+                CurrentArmour = 100;
+                UpdateArmour_UI_Text(); // upDate UI Text 
+            }
+            else
+            {
+                //Stores the current health and subtracts the dame value
+                CurrentArmour += ArmrAmnt; // add health points from healthPickup
+                UpdateArmour_UI_Text(); // upDate UI Text 
+            }
+        }
+
+        void ApplyArmourMega(int ArmrAmnt) // For applying 200 HP OR 1hp for small pickup
+        {
+            if (CurrentArmour > 200)
+            {
+                // Do nothing
+            }
+            else if (CurrentArmour + ArmrAmnt > 200)
+            {
+                CurrentArmour = 200;
+                UpdateArmour_UI_Text(); // upDate UI Text 
+            }
+            else
+            {
+                //Stores the current health and subtracts the dame value
+                CurrentArmour += ArmrAmnt; // add health points from healthPickup
+                UpdateArmour_UI_Text(); // upDate UI Text 
             }
         }
 
