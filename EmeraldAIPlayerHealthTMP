@@ -14,7 +14,7 @@ namespace EmeraldAI.Example
     /// You can also edit the EmeraldAIPlayerDamage script directly and add custom functions.
     /// 
     ///
-    /// **This modified version is sending the health amount at text to the canvas with Text Mesh Pro**
+    /// **This modified version is sending the health amount as text to the canvas with Text Mesh Pro**
     ///
     /// </summary>
     public class EmeraldAIPlayerHealth : MonoBehaviour
