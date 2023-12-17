@@ -5,6 +5,8 @@ using UnityEngine;
 using BNG;
 
 /// <summary> 
+/// Ammo Pickup code: This 1st code version console logs when a player 
+/// walks into the ammo pickup
 /// </summary>
 
 public class AmmoPickupPistol: MonoBehaviour
